@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from converter.functions import rate_display, symbols_display
-from  import CurrencySymbols
+from currency_symbols import CurrencySymbols
 
 rates = rate_display('https://api.exchangerate.host/latest')
 symbols = symbols_display(rates)
