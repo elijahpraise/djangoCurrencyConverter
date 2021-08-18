@@ -23,9 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4p6l5k4!6_ov%23#m7z%&h7ic2k4^1tcb+_79ozmeb$3wcd!$5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+import dj_database_url
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', ".herokuapp.com", ",pythonanywhere,com"]
+ALLOWED_HOSTS = ['127.0.0.1', ".herokuapp.com", ",pythonanywhere.com"]
 
 # Application definition
 
@@ -47,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'djangoConverterProject.urls'
@@ -75,8 +77,12 @@ WSGI_APPLICATION = 'djangoConverterProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'converter',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': ''
     }
 }
 
@@ -117,6 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIR = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
